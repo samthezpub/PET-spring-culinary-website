@@ -32,8 +32,8 @@ public class RecepiesController {
         return body;
     }
 
-    @GetMapping(path = "/update")
-    public ResponseEntity<String> updateRecipe(@RequestParam RecipeEntity recipe){
+    @PutMapping(path = "/update")
+    public ResponseEntity<String> updateRecipe(@RequestBody RecipeEntity recipe){
         recipeService.updateRecipe(recipe);
 
         String htmlResponse = recipeService.toString();

@@ -43,7 +43,7 @@ public class RecipeServiceImpl implements RecipeService {
      */
     @Override
     public void updateRecipe(RecipeEntity recipe) {
-
+        recipeRepository.save(recipe);
     }
 
     /**
