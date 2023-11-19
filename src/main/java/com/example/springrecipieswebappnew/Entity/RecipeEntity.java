@@ -1,5 +1,6 @@
 package com.example.springrecipieswebappnew.Entity;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,6 +23,7 @@ public class RecipeEntity {
     @JoinColumn(name = "dish_id")
     private DishEntity dish;
 
+    @Nullable
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
