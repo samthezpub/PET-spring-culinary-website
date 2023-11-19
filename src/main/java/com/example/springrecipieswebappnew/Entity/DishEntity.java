@@ -34,4 +34,8 @@ public class DishEntity {
     @Nullable
     @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL)
     private List<RecipeEntity> recipes;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private CategoryEntity category;
 }
