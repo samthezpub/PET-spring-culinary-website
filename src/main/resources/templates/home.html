@@ -9,5 +9,12 @@
 </head>
 <body>
     <h1>Hello Frogs!</h1>
+
+    <form method="POST" th:action="@{/recepies/create}">
+        <input name="content" id="content">
+        <input name="dish" id="dish">
+        <input name="user" id="user">
+        <input type="submit">
+    </form>
 </body>
 </html>
