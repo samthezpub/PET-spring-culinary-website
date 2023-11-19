@@ -11,5 +11,3 @@ CREATE TABLE public.category
 
     TABLESPACE pg_default;
 
-ALTER TABLE public.category
-    OWNER to postgres;
