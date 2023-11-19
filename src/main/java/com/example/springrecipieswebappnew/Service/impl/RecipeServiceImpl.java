@@ -1,8 +1,11 @@
 package com.example.springrecipieswebappnew.Service.impl;
 
+import com.example.springrecipieswebappnew.Entity.DishEntity;
 import com.example.springrecipieswebappnew.Entity.RecipeEntity;
+import com.example.springrecipieswebappnew.Repository.DishRepository;
 import com.example.springrecipieswebappnew.Repository.RecipeRepository;
 import com.example.springrecipieswebappnew.Service.RecipeService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -11,9 +14,11 @@ import java.util.Optional;
 public class RecipeServiceImpl implements RecipeService {
 
     private final RecipeRepository recipeRepository;
+    private final DishRepository dishRepository;
 
-    public RecipeServiceImpl(RecipeRepository recipeRepository) {
+    public RecipeServiceImpl(RecipeRepository recipeRepository, DishRepository dishRepository) {
         this.recipeRepository = recipeRepository;
+        this.dishRepository = dishRepository;
     }
 
     /**
@@ -21,7 +26,7 @@ public class RecipeServiceImpl implements RecipeService {
      */
     @Override
     public void createRecipe(RecipeEntity recipe) {
-
+        recipeRepository.save(recipe);
     }
 
     /**
@@ -38,7 +43,7 @@ public class RecipeServiceImpl implements RecipeService {
      */
     @Override
     public void updateRecipe(RecipeEntity recipe) {
-
+        recipeRepository.save(recipe);
     }
 
     /**

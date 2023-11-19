@@ -1,6 +1,7 @@
 package com.example.springrecipieswebappnew;
 
 import com.example.springrecipieswebappnew.Entity.DishEntity;
+import com.example.springrecipieswebappnew.Repository.DishRepository;
 import com.example.springrecipieswebappnew.Service.impl.DishServiceImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,6 +15,8 @@ public class SpringRecipiesWebappnewApplication {
         ApplicationContext run = SpringApplication.run(SpringRecipiesWebappnewApplication.class, args);
         DishServiceImpl bean = run.getBean(DishServiceImpl.class);
         bean.createDish(new DishEntity());
+
+
     }
 
 }
