@@ -1,5 +1,6 @@
 package com.example.springrecipieswebappnew.Entity;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,8 +13,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table("user")
 @Entity
+@Table(name = "user")
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,9 +27,11 @@ public class UserEntity {
     @Column(name = "password_encoded")
     private String password_encoded;
 
+    @Nullable
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<DishEntity> dishes;
 
+    @Nullable
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<RecipeEntity> recipes;
 }

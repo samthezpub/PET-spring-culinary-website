@@ -1,0 +1,1 @@
+create table user_entity (id bigserial not null, name varchar(255), password_encoded varchar(255), primary key (id))
