@@ -1,5 +1,6 @@
 package com.example.springrecipieswebappnew.Entity;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,6 +31,7 @@ public class DishEntity {
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
+    @Nullable
     @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL)
     private List<RecipeEntity> recipes;
 }
