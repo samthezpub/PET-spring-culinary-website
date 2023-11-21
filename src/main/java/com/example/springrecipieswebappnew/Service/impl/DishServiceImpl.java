@@ -4,9 +4,11 @@ import com.example.springrecipieswebappnew.Entity.DishEntity;
 import com.example.springrecipieswebappnew.Repository.DishRepository;
 import com.example.springrecipieswebappnew.Service.DishService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.Collections;
+import java.util.List;
 
 @Service
 public class DishServiceImpl implements DishService {
@@ -30,9 +32,19 @@ public class DishServiceImpl implements DishService {
      * @return
      */
     @Override
-    public Optional<DishEntity> findDishById(Long id) {
-        return dishRepository.findById(id);
+    public DishEntity findDishById(Long id) throws ChangeSetPersister.NotFoundException {
+        return dishRepository.findById(id).orElseThrow(ChangeSetPersister.NotFoundException::new);
     }
+
+    /**
+     * @param categoryId
+     * @return
+     */
+    @Override
+    public List<DishEntity> findDishesByCategoryId(Long categoryId) {
+        return dishRepository.findDishesByCategoryId(categoryId).orElse(Collections.emptyList());
+    }
+
 
     /**
      * @param dish
