@@ -11,7 +11,6 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 public class DishCardDTO {
     private Long id;
     private String name;
@@ -19,5 +18,24 @@ public class DishCardDTO {
     private String imageUrl;
     private Long categoryId;
 
+    private UserDTO user;
+    private List<RecepieDishDTO> recipes;
 
+    public DishCardDTO(Long id, String name, String description, String imageUrl, Long categoryId) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.imageUrl = imageUrl;
+        this.categoryId = categoryId;
+    }
+
+    public DishCardDTO(Long id, String name, String description, String imageUrl, Long categoryId, UserDTO user, List<RecepieDishDTO> recipes) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.imageUrl = imageUrl;
+        this.categoryId = categoryId;
+        this.user = user;
+        this.recipes = recipes;
+    }
 }
