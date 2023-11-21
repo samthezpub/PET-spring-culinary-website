@@ -17,6 +17,50 @@
         }
     </script>
 
+    <script>
+        function loadDishes(categoryId) {
+            // Здесь можешь использовать AJAX или другие методы для загрузки блюд по categoryId
+            // Например, можешь использовать fetch для отправки запроса на сервер
+            fetch('/dishes?category_id=' + categoryId)
+                .then(response => response.json())
+                .then(data => {
+                    // Обработка полученных данных и обновление блока с блюдами
+                    // Тут ты можешь использовать JavaScript для динамического обновления контента на странице
+                    // Например, заменить текущий HTML блока с блюдами на новый
+
+
+                    if (data.length == 0) {
+                        document.getElementById('dishesBlock').innerHTML = elementsNotFounded();
+                    }
+                    else{
+                        document.getElementById('dishesBlock').innerHTML = generateDishesHTML(data);
+                    }
+                })
+                .catch(
+
+                );
+        }
+
+        function elementsNotFounded(){
+            return "Тут ничего нет, можете добавить своё блюдо";
+        }
+
+        function generateDishesHTML(dishes) {
+            // Здесь можешь создать HTML-код для блока с блюдами на основе полученных данных
+            // Вернуть этот HTML
+            // Пример (псевдокод):
+            return dishes.map(dish =>
+                `<div class="card_unique_container">
+            <a href="#">
+                <div class="card_unique">
+                    <h3>${dish.name}</h3>
+                </div>
+            </a>
+        </div>`
+            ).join('');
+        }
+    </script>
+
     <style>
         a {
             text-decoration: none;
@@ -345,14 +389,8 @@
             <h2>Рецепты</h2>
         </div>
 
-        <div th:if="${selectedDishes != null}" class="content">
-            <div class="card_unique_container">
-                <a href="#">
-                    <div class="card_unique">
-                        <h3>Супы</h3>
-                    </div>
-                </a>
-            </div>
+        <div id="dishesBlock" class="content">
+
         </div>
         <!-- Тут может быть контент с рецептами -->
     </section>
