@@ -31,8 +31,7 @@
 
                     if (data.length == 0) {
                         document.getElementById('dishesBlock').innerHTML = elementsNotFounded();
-                    }
-                    else{
+                    } else {
                         document.getElementById('dishesBlock').innerHTML = generateDishesHTML(data);
                     }
                 })
@@ -41,7 +40,7 @@
                 );
         }
 
-        function elementsNotFounded(){
+        function elementsNotFounded() {
             return "Тут ничего нет, можете добавить своё блюдо";
         }
 
@@ -75,8 +74,7 @@
 
                     if (data.length == 0) {
                         document.getElementById('dishBlock').innerHTML = elementNotFounded();
-                    }
-                    else{
+                    } else {
                         document.getElementById('dishBlock').innerHTML = generateDishHTML(data);
                     }
                 })
@@ -85,7 +83,7 @@
                 );
         }
 
-        function elementNotFounded(){
+        function elementNotFounded() {
             return "Странно, тут ничего нет";
         }
 
@@ -110,49 +108,39 @@
                     ${dish.description}
                 </i>
             </div>
+        </div>
+        <div class="recipes">`;
 
-
-            <div class="recepies">
-                <div class="accordion accordion-flush" id="accordionFlushExample">
-                    <!-- Рецепт Арины -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingOne">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#flush-collapseOne" aria-expanded="true"
-                                    aria-controls="flush-collapseOne">
-                                Рецепт Арины
-                            </button>
-                        </h2>
-                        <div id="flush-collapseOne" class="accordion-collapse collapse"
-                             aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">
-                                // ${dish}
+            let recepiesHTML = null;
+            if (dish.recipes.length == 0) {
+                console.error("Длинна 0");
+                recepiesHTML = '<div><p>Рецептов пока нет! Добавьте первый</p></div>';
+                return html + recepiesHTML;
+            } else {
+                recipesHTML = dish.recipes.map(recipe => `
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-heading${recipe.id}">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapse${recipe.id}" aria-expanded="true"
+                                        aria-controls="flush-collapse${recipe.id}">
+                                    Рецепт ${recipe.user.name}
+                                </button>
+                            </h2>
+                            <div id="flush-collapse${recipe.id}" class="accordion-collapse collapse"
+                                 aria-labelledby="flush-heading${recipe.id}" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    ${recipe.content}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </div>`).join('');
 
-                    <!-- Рецепт Васи -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingTwo">
-                            <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo"
-                                    aria-expanded="true" aria-controls="flush-collapseOne">
-                                Рецепт Васи
-                            </button>
-                        </h2>
-                        <div id="flush-collapseTwo" class="accordion-collapse collapse"
-                             aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">
-                                ${dish.recipeVasya}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>`;
+                const recipeBlockEndHTML = `</div>`;
+                return html + recipesHTML + recipeBlockEndHTML;
+            }
 
-            // Возвращаем сгенерированный HTML
-            return html;
+
         }
 
     </script>
@@ -303,7 +291,8 @@
 
         }
 
-        section .card_unique_container {}
+        section .card_unique_container {
+        }
 
         section .card_unique {
             padding: 10px;
@@ -330,6 +319,15 @@
 
         section .item-container .content {
             width: 100%;
+
+            z-index: 1;
+        }
+
+        section .item-container .upper {
+            position: sticky;
+            top: 0;
+
+            z-index: 100;
         }
 
         section .item-container .content .description {
@@ -415,11 +413,11 @@
                 height: 30px;
             }
 
-            .upper .image-container{
+            .upper .image-container {
                 margin-right: 15px;
             }
 
-            .item-container .content .upper {
+            .item-container .content {
                 position: relative;
             }
 
@@ -429,7 +427,8 @@
             .burger-icon {
                 display: none;
             }
-            .burger-image{
+
+            .burger-image {
                 display: none;
             }
         }
