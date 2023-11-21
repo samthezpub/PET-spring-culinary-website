@@ -1,9 +1,11 @@
 package com.example.springrecipieswebappnew.Entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "category")
 public class CategoryEntity {

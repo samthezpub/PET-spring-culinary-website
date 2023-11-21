@@ -326,14 +326,15 @@
         </div>
 
         <div class="content">
-            <div class="card_unique_container">
 
+            <div th:object="${categoryList}" th:each="category: ${categoryList}" class="card_unique_container">
                 <a href="#">
                     <div class="card_unique">
-                        <h3>Национальная кухня</h3>
+                        <h3 th:text="${category.getName()}">Национальная кухня</h3>
                     </div>
                 </a>
             </div>
+
         </div>
 
     </section>
