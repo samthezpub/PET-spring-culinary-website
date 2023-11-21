@@ -328,9 +328,9 @@
         <div class="content">
 
             <div th:object="${categoryList}" th:each="category: ${categoryList}" class="card_unique_container">
-                <a href="#">
+                <a href="#" th:onclick="'loadDishes(\'' + ${category.getId()} + '\')'">
                     <div class="card_unique">
-                        <h3 th:text="${category.getName()}">Национальная кухня</h3>
+                        <h3 th:text="${category.getName()}">Загрузка</h3>
                     </div>
                 </a>
             </div>
@@ -359,7 +359,7 @@
 
     <section>
         <div class="item-container">
-            <div class="content">
+            <div th:if="${dish}" class="content">
                 <div class="upper">
                     <div class="image-container">
                         <img class="image" th:src="@{images/soup.jpg}" alt="">

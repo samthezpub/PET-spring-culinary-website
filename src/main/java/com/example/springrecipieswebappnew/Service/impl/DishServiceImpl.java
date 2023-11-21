@@ -6,6 +6,8 @@ import com.example.springrecipieswebappnew.Service.DishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -33,6 +35,16 @@ public class DishServiceImpl implements DishService {
     public Optional<DishEntity> findDishById(Long id) {
         return dishRepository.findById(id);
     }
+
+    /**
+     * @param categoryId
+     * @return
+     */
+    @Override
+    public List<DishEntity> findDishesByCategoryId(Long categoryId) {
+        return dishRepository.findDishesByCategoryId(categoryId).orElse(Collections.emptyList());
+    }
+
 
     /**
      * @param dish
