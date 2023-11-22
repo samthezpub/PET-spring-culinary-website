@@ -366,7 +366,7 @@
             height: 10vh;
         }
 
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 800px) {
             main {
                 display: flex;
                 align-items: center;
@@ -392,6 +392,8 @@
                 width: 100%;
                 background-color: #333;
                 z-index: 1;
+                border-bottom-left-radius: 10px;
+                border-bottom-right-radius: 10px;
             }
 
             nav ul.show {
@@ -421,9 +423,12 @@
                 position: relative;
             }
 
+            .btn-outline-light div{
+            width: 250px;
+            }
         }
 
-        @media only screen and (min-width: 601px) {
+        @media only screen and (min-width: 801px) {
             .burger-icon {
                 display: none;
             }
@@ -440,7 +445,7 @@
 <header>
     <nav>
         <div class="logo">
-            <a href="home.html">
+            <a href="index.html">
                 <img th:src="@{images/logo.png}" alt="logo" class="logo_img">
             </a>
         </div>
@@ -448,11 +453,11 @@
             <img class="burger-image" th:src="@{images/burger.jpg}" alt="Burger Icon">
         </div>
         <ul>
-            <li><a href="#">Блог</a></li>
-            <li><a href="#">Рецепты</a></li>
-            <li><a href="#">Модераторская панель</a></li>
-            <li><a href="#">Контакты</a></li>
-            <li><a href="#">Поддержать проект</a></li>
+            <li><a href="#" class="btn btn-outline-light"><div>Блог</div></a></li>
+            <li><a href="#" class="btn btn-outline-light"><div>Рецепты</div></a></li>
+            <li><a href="#" class="btn btn-outline-light"><div>Модераторская панель</div></a></li>
+            <li><a href="#" class="btn btn-outline-light"><div>Контакты</div></a></li>
+            <li><a href="#" class="btn btn-outline-light"><div>Поддержать проект</div></a></li>
         </ul>
     </nav>
 </header>

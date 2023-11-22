@@ -30,7 +30,7 @@ public class MainPageController {
 
         model.addAttribute("categoryList", allCategories);
 
-        return "home";
+        return "index";
     }
 
 }
