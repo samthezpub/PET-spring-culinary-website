@@ -27,6 +27,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     }
 
+
     /**
      * @param id
      * @return
@@ -34,6 +35,11 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Optional<CategoryEntity> findCategoryById(Long id) {
         return Optional.empty();
+    }
+
+    @Override
+    public List<CategoryEntity> findAllCategories() {
+        return categoryRepository.findAll();
     }
 
     /**
@@ -55,8 +61,5 @@ public class CategoryServiceImpl implements CategoryService {
     /**
      * @return
      */
-    @Override
-    public List<CategoryEntity> findAllCategories() {
-        return categoryRepository.findAll();
-    }
+
 }

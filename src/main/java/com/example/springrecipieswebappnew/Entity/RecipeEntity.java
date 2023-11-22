@@ -1,5 +1,6 @@
 package com.example.springrecipieswebappnew.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -23,8 +24,19 @@ public class RecipeEntity {
     @JoinColumn(name = "dish_id")
     private DishEntity dish;
 
+    @JsonIgnore
     @Nullable
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
+
+    @Override
+    public String toString() {
+        return "RecipeEntity{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", dish=" + dish.getId() +
+                ", user=" + user.getId() +
+                '}';
+    }
 }

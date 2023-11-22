@@ -1,7 +1,6 @@
 package com.example.springrecipieswebappnew.Service;
 
 import com.example.springrecipieswebappnew.Entity.CategoryEntity;
-import com.example.springrecipieswebappnew.Entity.CategoryEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
