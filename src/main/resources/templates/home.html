@@ -18,13 +18,20 @@
     </script>
 
     <script>
+
+        function resetBackground(card_id){
+            let block = document.getElementById(card_id);
+            block.style.backgroundImage = "";
+
+            let text = block.children[0].querySelector('.card_text');
+            text.style.color = "inherit";
+            text.style.textShadow = "";
+        }
         function setBackground(card_id, image_url){
-            console.log(image_url);
-            // console.log(`На меня навелась карточка ${card_id}, она имеет image_url ${image_url}`)
             let block = document.getElementById(card_id);
             block.style.backgroundImage = "url(" + image_url + ")";
             block.style.backgroundRepeat = "no-repeat";
-            block.style.backgroundSize = "101% 100%";
+            block.style.backgroundSize = "cover";
             block.style.backgroundPosition = "center";
             block.style.backgroundClip = "padding-box";
 
@@ -68,7 +75,7 @@
             // Вернуть этот HTML
             // Пример (псевдокод):
             return dishes.map(dish =>
-                `<div class="card_unique_container" id="dishCardInner${dish.id}" onmouseover="setBackground('dishCardInner${dish.id}', '${dish.imageUrl}')" onclick="loadDish(${dish.id})">
+                `<div class="card_unique_container" id="dishCardInner${dish.id}" onmouseover="setBackground('dishCardInner${dish.id}', '${dish.imageUrl}')" onmouseout="resetBackground('dishCardInner${dish.id}')" onclick="loadDish(${dish.id})">
                     <a href="#">
                         <div class="card_unique">
                             <h3 class="card_text">${dish.name}</h3>
@@ -317,6 +324,8 @@
 
             display: flex;
             align-items: center;
+
+
         }
 
         section #dishesBlock .card_unique_container {
