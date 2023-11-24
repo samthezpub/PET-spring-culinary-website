@@ -63,13 +63,13 @@ public class DishesController {
                     dishById.getDescription(),
                     dishById.getImageUrl(),
                     dishById.getCategory().getId(),
-                    new UserDTO(dishById.getUser().getId(), dishById.getUser().getName()),
+                    new UserDTO(dishById.getUser().getId(), dishById.getUser().getUsername()),
                     recipeService.findRecipiesByDishId(id).stream().map(recipe -> {
                         return new RecepieDishDTO(recipe.getId(),
                                 recipe.getContent(),
                                 recipe.getDish(),
                                 new UserDTO(recipe.getUser().getId(),
-                                        recipe.getUser().getName())
+                                        recipe.getUser().getUsername())
                         );
                     }).collect(Collectors.toList())
             );
