@@ -21,7 +21,16 @@
 
         function resetBackground(card_id){
             let block = document.getElementById(card_id);
-            block.style.backgroundImage = "";
+
+            if (!block.className.includes("clicked")){
+                block.style.borderColor = "black";
+                block.style.backgroundImage = "";
+            }
+
+            // TODO сделать так чтобы при клике у других карточек менялся класс на card_unique container
+
+            let linkElement = block.children[0];
+            linkElement.style.animation = "";
 
             let text = block.children[0].querySelector('.card_text');
             text.style.color = "inherit";
@@ -34,6 +43,11 @@
             block.style.backgroundSize = "cover";
             block.style.backgroundPosition = "center";
             block.style.backgroundClip = "padding-box";
+            block.style.borderColor = "#f77455";
+
+
+            let linkElement = block.children[0];
+             linkElement.style.animation = "forContent 0.3s ease 0s 1 normal forwards";
 
             let text = block.children[0].querySelector('.card_text');
             text.style.color = "white";
@@ -87,7 +101,14 @@
     </script>
 
     <script>
+
+        function setBorder(id){
+            document.getElementById(id).style.borderColor = "#f77455";
+            document.getElementById(id).className += " clicked";
+        }
         function loadDish(id) {
+
+            setBorder("dishCardInner"+id);
             // Здесь можешь использовать AJAX или другие методы для загрузки блюд по categoryId
             // Например, можешь использовать fetch для отправки запроса на сервер
             fetch('/getbyid?id=' + id)
@@ -316,25 +337,50 @@
 
         }
 
+        @keyframes forElems {
+            0% {
+                transform: scale(0);
+                transform-origin: 0% 50%;
+            }
+
+            100% {
+                transform: scale(1);
+                transform-origin: 0% 50%;
+            }
+        }
+
+        @keyframes forContent {
+            0%,
+            50%,
+            100% {
+                opacity: 1;
+            }
+
+            25%,
+            75% {
+                opacity: 0;
+            }
+        }
 
         section .card_unique_container {
-            border: #333 1px solid;
+            border: #333 2px solid;
 
             cursor: pointer;
 
             display: flex;
             align-items: center;
 
+            animation: forElems 0.3s ease 0s 1 normal forwards;
 
         }
 
         section #dishesBlock .card_unique_container {
-            border: #333 1px solid;
             min-height: 100px;
         }
 
         section .card_unique {
             padding: 10px;
+
         }
 
         section .card_unique_container:not(:first-child) {
