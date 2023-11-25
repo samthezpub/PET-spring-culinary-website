@@ -78,7 +78,6 @@ public class DishesController {
             throw new RuntimeException(e);
         }
 
-        System.out.println(dishCardDTO);
         return dishCardDTO;
     }
 }

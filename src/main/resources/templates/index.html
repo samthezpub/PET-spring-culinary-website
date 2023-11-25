@@ -18,6 +18,31 @@
     </script>
 
     <script>
+
+        function resetBackground(card_id){
+            let block = document.getElementById(card_id);
+            block.style.backgroundImage = "";
+
+            let text = block.children[0].querySelector('.card_text');
+            text.style.color = "inherit";
+            text.style.textShadow = "";
+        }
+        function setBackground(card_id, image_url){
+            let block = document.getElementById(card_id);
+            block.style.backgroundImage = "url(" + image_url + ")";
+            block.style.backgroundRepeat = "no-repeat";
+            block.style.backgroundSize = "cover";
+            block.style.backgroundPosition = "center";
+            block.style.backgroundClip = "padding-box";
+
+            let text = block.children[0].querySelector('.card_text');
+            text.style.color = "white";
+            text.style.textShadow = "1px 1px 1px #000";
+
+        }
+    </script>
+
+    <script>
         function loadDishes(categoryId) {
             // Здесь можешь использовать AJAX или другие методы для загрузки блюд по categoryId
             // Например, можешь использовать fetch для отправки запроса на сервер
@@ -33,6 +58,7 @@
                         document.getElementById('dishesBlock').innerHTML = elementsNotFounded();
                     } else {
                         document.getElementById('dishesBlock').innerHTML = generateDishesHTML(data);
+                        console.log(data);
                     }
                 })
                 .catch(
@@ -49,10 +75,10 @@
             // Вернуть этот HTML
             // Пример (псевдокод):
             return dishes.map(dish =>
-                `<div class="card_unique_container">
-                    <a href="#" onclick="loadDish(${dish.id})">
+                `<div class="card_unique_container" id="dishCardInner${dish.id}" onmouseover="setBackground('dishCardInner${dish.id}', '${dish.imageUrl}')" onmouseout="resetBackground('dishCardInner${dish.id}')" onclick="loadDish(${dish.id})">
+                    <a href="#">
                         <div class="card_unique">
-                            <h3>${dish.name}</h3>
+                            <h3 class="card_text">${dish.name}</h3>
                         </div>
                     </a>
                 </div>`
@@ -88,8 +114,7 @@
         }
 
         function generateDishHTML(dish) {
-            // Переменные для изображений
-            const imagePath = "@{images/soup.jpg}";
+
 
             console.info(dish);
             // Создание HTML-кода для блока с блюдами на основе данных
@@ -97,7 +122,7 @@
         <div class="content">
             <div class="upper">
                 <div class="image-container">
-                    <img class="image" th:src="${imagePath}" alt="">
+                    <img class="image" src="${dish.imageUrl}" alt="">
                 </div>
                 <div>
                     <h3>${dish.name}</h3>
@@ -291,12 +316,25 @@
 
         }
 
+
         section .card_unique_container {
+            border: #333 1px solid;
+
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+
+
+        }
+
+        section #dishesBlock .card_unique_container {
+            border: #333 1px solid;
+            min-height: 100px;
         }
 
         section .card_unique {
             padding: 10px;
-            border: #333 1px solid;
         }
 
         section .card_unique_container:not(:first-child) {
@@ -366,7 +404,7 @@
             height: 10vh;
         }
 
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 800px) {
             main {
                 display: flex;
                 align-items: center;
@@ -392,6 +430,8 @@
                 width: 100%;
                 background-color: #333;
                 z-index: 1;
+                border-bottom-left-radius: 10px;
+                border-bottom-right-radius: 10px;
             }
 
             nav ul.show {
@@ -421,9 +461,12 @@
                 position: relative;
             }
 
+            .btn-outline-light div{
+            width: 250px;
+            }
         }
 
-        @media only screen and (min-width: 601px) {
+        @media only screen and (min-width: 801px) {
             .burger-icon {
                 display: none;
             }
@@ -440,7 +483,7 @@
 <header>
     <nav>
         <div class="logo">
-            <a href="home.html">
+            <a href="index.html">
                 <img th:src="@{images/logo.png}" alt="logo" class="logo_img">
             </a>
         </div>
@@ -448,11 +491,11 @@
             <img class="burger-image" th:src="@{images/burger.jpg}" alt="Burger Icon">
         </div>
         <ul>
-            <li><a href="#">Блог</a></li>
-            <li><a href="#">Рецепты</a></li>
-            <li><a href="#">Модераторская панель</a></li>
-            <li><a href="#">Контакты</a></li>
-            <li><a href="#">Поддержать проект</a></li>
+            <li><a href="#" class="btn btn-outline-light"><div>Блог</div></a></li>
+            <li><a href="#" class="btn btn-outline-light"><div>Рецепты</div></a></li>
+            <li><a href="#" class="btn btn-outline-light"><div>Модераторская панель</div></a></li>
+            <li><a href="#" class="btn btn-outline-light"><div>Контакты</div></a></li>
+            <li><a href="#" class="btn btn-outline-light"><div>Поддержать проект</div></a></li>
         </ul>
     </nav>
 </header>
@@ -466,8 +509,8 @@
 
         <div class="content">
 
-            <div th:object="${categoryList}" th:each="category: ${categoryList}" class="card_unique_container">
-                <a href="#" th:onclick="'loadDishes(\'' + ${category.getId()} + '\')'">
+            <div th:object="${categoryList}" th:each="category: ${categoryList}" class="card_unique_container" th:onclick="'loadDishes(\'' + ${category.getId()} + '\')'">
+                <a href="#" >
                     <div class="card_unique">
                         <h3 th:text="${category.getName()}">Загрузка</h3>
                     </div>
